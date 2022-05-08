@@ -1,0 +1,23 @@
+{
+  "name": "nodejs-server",
+  "version": "1.0.0",
+  "description": "This repo needs to improve my skills about nodejs.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JonathanMauroFerrara/nodejs-server-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JonathanMauroFerrara/nodejs-server-api/issues"
+  },
+  "homepage": "https://github.com/JonathanMauroFerrara/nodejs-server-api#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16"
+  }
+}
