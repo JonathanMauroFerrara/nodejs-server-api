@@ -1,21 +1,22 @@
 const express = require('express')
 const app = express()
 
-app.get('/',  (req, res) => {
-    res.send('Welcome to homepage')
+
+app.use(express.static('public'));
+
+app.get('/', (req, res) =>{
+    res.sendFile('index.html', {root: __dirname + "/public"});
 })
-
-
 app.get('/about', (req, res) => {
-    res.send(`<h1>Welcome to About</h1>`)
+    res.sendFile('about.html', {root: __dirname + "/public"})
 })
 
 app.get('/contacts', (req, res) =>{
-    res.send(`<h1>Welcome to contacts</h1>`)
+    res.sendFile('contacts.html', {root: __dirname + "/public"})
 })
 
 app.all('*', (req,res)=>{
-    res.send(`<h1>404 Not Found</h1>`)
+    res.sendFile('404.html', {root: __dirname + "/public"})
 })
 
 
