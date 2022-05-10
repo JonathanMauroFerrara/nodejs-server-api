@@ -1,14 +1,30 @@
 const express = require('express')
 const app = express()
 const {people} = require('./json_files/people');
+const middleware = require ('./test_modules/middleware');
+const middleware_2 = require ('./test_modules/middleware_2');
 
 /* app.use(express.static('public')); */
+
+//middleware used for show json response
+app.use(express.json());
+
+
+//use middleware on every route
+/* app.use(middleware); */
+
+//use middleware on single rout
+/* app.use('/about', middleware); */
+
+//use multi middleware function
+/* app.use([middleware, middleware_2,]) */
+
 
 app.get('/', (req, res) =>{
     res.sendFile('index.html', {root: __dirname + "/public"});
  })
 
-app.get('/about', (req, res) => {
+app.get('/about',(req, res) => {
     res.sendFile('about.html', {root: __dirname + "/public"})
 })
 
@@ -56,10 +72,50 @@ app.get('/search', (req, res) =>{
 
 })
 
+//API GET
+app.get('/api/people', (req,res)=>{
+    res.status(200).json({data: people});
+})
+//API GET Single person
+app.get('/api/people/:id', (req,res) =>{
+    const { id } = req.params;
+
+    const filteredPeople = people.find((person) => person.id === Number(id));
+    res.json(filteredPeople);
+})
+
+//API POST
+app.post('/api/people', (req, res) =>{
+    console.log(req.body);
+    const newPerson = req.body;
+    people.push(newPerson);
+    res.status(200).send({data: people})
+})
+
+//API PUT
+app.put('/api/people/:id', (req, res) =>{
+    console.log(req.body);
+    const { id } = req.params
+    const editPerson = req.body;
+    people[Number(id) - 1] = editPerson;
+    res.status(200).send({data: people})
+})
+
+
+//API DELETE
+app.delete('/api/people/:id', (req, res) =>{
+    console.log(req.body);
+    const { id } = req.params
+    const index = people.findIndex(person => people.id === id)
+    people.splice(index, 1);
+    res.status(200).send({data: people})
+})
+
 //leave this ever at the bottom
 app.all('*', (req,res)=>{
     res.sendFile('404.html', {root: __dirname + "/public"})
 })
+
 
 
 
