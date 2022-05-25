@@ -16,7 +16,7 @@ app.use(express.json());
 //use middleware on single rout
 /* app.use('/about', middleware); */
 
-//use multi middleware function
+//use multi middleware functionzr
 /* app.use([middleware, middleware_2,]) */
 
 
